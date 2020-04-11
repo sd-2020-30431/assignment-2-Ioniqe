@@ -1,5 +1,6 @@
 package net.model;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -7,12 +8,17 @@ import java.util.List;
 public abstract class Report {
     public List<Item> getItems(List<Item> itemList, int numberOfDays) {
         int days;
-        Date date = new Date();
         List<Item> itemsPurchasedInTheGivenTimePeriod = new ArrayList<>();
+        Date today = new Date();
 
         for (Item item : itemList) {
-            days = (int) ((item.getPurchaseDate().getTime() - date.getTime()) / 86400000);
-            days++;
+
+            if (item.getConsumptionDate() != null) {
+                days = (int) Duration.between(item.getConsumptionDate().toInstant(), today.toInstant()).toDays();
+
+            } else {
+                days = (int) Duration.between(item.getExpirationDate().toInstant(), today.toInstant()).toDays();
+            }
 
             if (days <= numberOfDays) {
                 itemsPurchasedInTheGivenTimePeriod.add(item);
