@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Goal Stats</title>
+</head>
+<body>
+<div align="center">
+    <h3>
+        With the current goal of <span th:text="${calories}"/> calories a day, you will have <span th:text="${waste}"/>
+    </h3>
+
+    <a th:href="@{/login}"
+       th:if="${donate}">donate to a charity</a>
+
+</div>
+</body>
+</html>
