@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <title>The current lists</title>
+</head>
+<body>
+<div align="center">
+    <h1>CURRENT LISTS</h1>
+    <br/><br/>
+    <form th:action="@{/lists/${username}}" method="post">
+        <table border="1" cellpadding="10">
+            <thead>
+            <tr>
+                <th>List ID</th>
+                <th>Name</th>
+                <th>Options</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="list : ${listOfLists}">
+                <td th:text="${list.id}">List ID</td>
+                <td th:text="${list.name}">Name</td>
+                <td>
+                    <a th:href="@{'/edit/' + ${list.id}}">Edit List</a>
+                    &nbsp;&nbsp;&nbsp;
+                    <a th:href="@{'/delete/' + ${username} + '/' + ${list.id}}">Delete List</a>
+                </td>
+            </tr>
+            </tbody>
+
+        </table>
+    </form>
+    <br/><br/>
+    <a th:href="@{/newList}">Create New List</a>
+
+    </br>
+    </br>
+    <a th:href="@{'/inputGoal/'+${username}}">Set your goal</a>
+
+    </br>
+    </br>
+
+    <form action="#" data-th-action="@{/report}" method="get">
+        <input type="hidden" name="username" th:value="${username}"/>
+        <button type="submit" name="action" value="WEEKLY">See weekly report</button>
+        <button type="submit" name="action" value="MONTHLY">See monthly report</button>
+    </form>
+
+</div>
+</body>
+</html>
