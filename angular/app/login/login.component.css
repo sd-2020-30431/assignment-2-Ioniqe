@@ -1,0 +1,49 @@
+/* Application-wide Styles */
+h1 {
+  text-align: center;
+  color: #EB9486;
+  font-family: 'Arial Narrow Bold';
+  font-size: 250%;
+}
+h2, h3, h6 {
+  color: #EB9486;
+  font-family: 'Arial Narrow Bold';
+  font-weight: lighter;
+}
+body {
+  margin: 2em;
+}
+
+body, input[type="text"]{
+  color: #333;
+  font-family: Cambria, Georgia;
+}
+/* azure 73B9C9   377d92*/
+button{
+  color: teal;
+  font-weight: 600;
+  background-color: #F3DE8A;
+  border-radius: 15px;
+  padding: 8px 15px;  
+  font-size: 15px;
+  font-family: 'Arial Narrow Bold';
+  box-shadow: 0px 3px #276172;
+}
+
+/* everywhere else */
+* {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+}
+
+.vertical-center {
+  margin: 0;
+  position: absolute;
+  top: 40%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
