@@ -4,28 +4,27 @@
     <input type="text" placeholder="Password">
 </form> -->
 
+<div style="margin-top: 13%;">
+    <h1>{{title}}</h1>
 
-    <div style="margin-top: 13%;">
-        <h1>{{title}}</h1>
+    <div class="center">
+        <h2>
+        username: <input type="text" [formControl]="usernameForm" 
+                        style="font-size: medium; color: #13293D; font-weight: bold; font-family: Cambria;
+                            background-color: #F3DE8A;   border-radius: 15px; ">
+        </h2>
+        
+        <h2 style="margin-left: 3%;">
+        password: <input type="password" [formControl]="passwordForm" 
+                    style="font-size: medium; background-color: #F3DE8A;   border-radius: 15px;">
+        </h2>
+    </div>
 
-        <div class="center">
-            <h2>
-            username: <input type="text" [formControl]="usernameForm" 
-                            style="font-size: medium; color: #13293D; font-weight: bold; font-family: Cambria;
-                             background-color: #F3DE8A;   border-radius: 15px; ">
-            </h2>
-            
-            <h2 style="margin-left: 3%;">
-            password: <input type="password" [formControl]="passwordForm" 
-                        style="font-size: medium; background-color: #F3DE8A;   border-radius: 15px;">
-            </h2>
-        </div>
-
-        <div class="center">
-            <button (click)="verifyLogin()">Log in</button>
-            <button (click)="gotoNewUserPage('newUser')" style="margin-left: 1%;">New User</button>
-
-        </div>
-
+    <div class="center">
+        <button (click)="verifyLogin()">Log in</button>
+        <button (click)="gotoNewUserPage('newUser')" style="margin-left: 1%;">New User</button>
 
     </div>
+
+
+</div>

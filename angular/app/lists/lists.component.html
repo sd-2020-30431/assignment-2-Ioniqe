@@ -13,7 +13,7 @@
             <tr *ngFor="let list of lists | async">
                 <td>{{list.name}}</td>
                 <td>
-                    <button (click)="editList()">edit</button>
+                    <button (click)="editList(list.id)">edit</button>
                 </td>
                 <td>
                     <button (click)="deleteList(list.id)">delete</button> 
@@ -32,8 +32,6 @@
     </h2>
 </div>
 
-
-
 <div class="center">
     <button (click)="submitCalories()" style="border-radius: 8px;">See Reports</button>
 </div>
@@ -44,7 +42,6 @@
                     style="font-size: medium; color: #13293D; font-weight: bold; font-family: Cambria;
                         background-color: #F3DE8A;   border-radius: 15px; ">
     </h2>
-
 </div>
 
 <div class="center">

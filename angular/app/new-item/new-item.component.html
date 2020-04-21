@@ -1,0 +1,54 @@
+<div style="margin-top: 13%;">
+    <h1>New Item</h1>
+    <div class="center">
+        <h2>
+        Choose name: <input type="text" [formControl]="newNameForm" 
+                        style="font-size: medium; color: #13293D; font-weight: bold; font-family: Cambria;
+                            background-color: #F3DE8A;   border-radius: 15px; ">
+        </h2>
+
+        <div style="margin-left: 3%;">
+            <h2>
+            Choose quantity: <input type="text" [formControl]="newQuantityForm" 
+                                style="font-size: medium; color: #13293D; font-weight: bold; font-family: Cambria;
+                                    background-color: #F3DE8A;   border-radius: 15px;">
+            </h2>
+        </div>
+
+        <div style="margin-left: 3%;">
+            <h2>
+            Choose calories: <input type="text" [formControl]="newCaloriesForm" 
+                                style="font-size: medium; color: #13293D; font-weight: bold; font-family: Cambria;
+                                    background-color: #F3DE8A;   border-radius: 15px;">
+            </h2>
+        </div>
+
+        <div style="margin-left: 3%;">
+            <h2>
+            Choose purchaseDate: <input type="text" [formControl]="newPurchaseDateForm" 
+                                style="font-size: medium; color: #13293D; font-weight: bold; font-family: Cambria;
+                                    background-color: #F3DE8A;   border-radius: 15px;">
+            </h2>
+        </div>
+
+        <div style="margin-left: 3%;">
+            <h2>
+            Choose expirationDate: <input type="text" [formControl]="newExpirationDateForm" 
+                                style="font-size: medium; color: #13293D; font-weight: bold; font-family: Cambria;
+                                    background-color: #F3DE8A;   border-radius: 15px;">
+            </h2>
+        </div>
+
+        <div style="margin-left: 3%;">
+            <h2>
+            Choose consumptionDate: <input type="text" [formControl]="newConsumptionDateForm" 
+                                style="font-size: medium; color: #13293D; font-weight: bold; font-family: Cambria;
+                                    background-color: #F3DE8A;   border-radius: 15px;">
+            </h2>
+        </div>
+    </div>
+</div>
+
+<div class="center">
+    <button (click)="submitNewItem()">Submit</button> 
+</div>

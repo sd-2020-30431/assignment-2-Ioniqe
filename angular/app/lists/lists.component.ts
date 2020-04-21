@@ -38,8 +38,8 @@ export class ListsComponent implements OnInit {
     this.lists = this.service.getLists(this.username);
   }
 
-  editList(){
-
+  editList(id:number){
+    this._router.navigate(['/editList', this.username, id]);
   }
 
   deleteList(id:number){
@@ -60,6 +60,8 @@ export class ListsComponent implements OnInit {
     this.user.password = this.password;
     
     this.userService.updateGoalForUser(this.user).subscribe();
+
+    this._router.navigate(['/reports', this.username]);
   } 
 
   newListNameForm = new FormControl('');

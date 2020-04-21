@@ -1,17 +1,22 @@
-<h1>new-user works!</h1>
-<!-- <div class="center">
-<table cellpadding="10">
-    <tr>
-        <h3>Username:</h3>
-        <td><input type="text" th:field="*{username}" /></td>
-    </tr>
-    <tr>
-        <h3>Password:</h3>
-        <td><input type="text" th:field="*{password}" /></td>
-    </tr>
+<div style="margin-top: 13%;">
+    <h1>New User</h1>
+    <div class="center">
+        <h2>
+        Choose username: <input type="text" [formControl]="newUsernameForm" 
+                        style="font-size: medium; color: #13293D; font-weight: bold; font-family: Cambria;
+                            background-color: #F3DE8A;   border-radius: 15px; ">
+        </h2>
 
-    <tr>
-        <td colspan="2"><button type="submit">Save</button> </td>
-    </tr>
-</table>
-</div> -->
+        <div style="margin-left: 3%;">
+            <h2>
+            Choose password: <input type="text" [formControl]="newPasswordForm" 
+                                style="font-size: medium; color: #13293D; font-weight: bold; font-family: Cambria;
+                                    background-color: #F3DE8A;   border-radius: 15px;">
+            </h2>
+        </div>
+    </div>
+</div>
+
+<div class="center">
+    <button (click)="submitNewUser()">Submit</button> 
+</div>
