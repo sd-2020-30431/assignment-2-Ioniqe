@@ -1,0 +1,44 @@
+<h1>Edit List</h1>
+
+<div class="center">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Quantity</th>
+                <th>Calories</th>
+                <th>Purchase Date</th>
+                <th>Expiration Date</th>
+                <th>Consumption Date</th>
+                <th>Edit item</th>
+                <th>Donate item</th>
+            </tr>
+        </thead>
+        
+        <tbody>
+            <tr *ngFor="let item of items | async">
+                <td>{{item.name}}</td>
+                <td>{{item.quantity}}</td>
+                <td>{{item.calories}}</td>
+                <td>{{item.purchaseDate}}</td>
+                <td>{{item.expirationDate}}</td>
+                <td>{{item.consumptionDate}}</td>
+                <td class="center">
+                    <button (click)="editItem(item.id)">edit</button>
+                </td>
+
+                <td>
+                    <div class="center">
+                        <button (click)="donateItem(item.id)">donate</button> 
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>
+
+<div class="center" style="margin-top: 1%;">
+    <button (click)="newItem()" style="border-radius: 8px;">New Item</button> 
+    <button (click)="goBackToLists()" style="margin-left: 1%; border-radius: 8px;">Back to Lists</button> 
+</div>
