@@ -1,0 +1,19 @@
+<h1>Charity List</h1>
+<div class="center">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Donate</th>
+            </tr>
+        </thead>
+        
+        <tbody>
+            <tr *ngFor="let charity of charities | async">
+                <td>{{charity.name}}</td>
+                <td><button (click)="donateToThisCharity()">donate</button></td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>

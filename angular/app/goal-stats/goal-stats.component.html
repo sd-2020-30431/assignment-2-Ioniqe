@@ -1,0 +1,11 @@
+<div *ngIf="waste" style="margin-top: 18%;">  
+    <h1> With the current goal of {{userGoal}} calories a day, you will have {{ (waste | async).name }}</h1>
+</div>
+
+<div class="center" style="margin-top: 5%;">
+    <button (click)="goBackToLists()" style="margin-left: 1%;">Back to Lists</button> 
+</div>
+
+<!-- <h1 *ngIf="waste">
+    {{ waste | async }}
+</h1> -->

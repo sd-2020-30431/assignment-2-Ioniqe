@@ -61,7 +61,7 @@ export class ListsComponent implements OnInit {
     
     this.userService.updateGoalForUser(this.user).subscribe();
 
-    this._router.navigate(['/reports', this.username]);
+    this._router.navigate(['/reports', this.username, this.user.goal]);
   } 
 
   newListNameForm = new FormControl('');
