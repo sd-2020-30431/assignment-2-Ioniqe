@@ -8,6 +8,7 @@ import { NewUserComponent } from './new-user/new-user.component';
 import { ReportComponent } from './report/report.component';
 import { EditListComponent } from './edit-list/edit-list.component';
 import { NewItemComponent } from './new-item/new-item.component';
+import { EditItemComponent } from './edit-item/edit-item.component';
 
 const routes: Routes = [
   {path:'login', component: LoginComponent},
@@ -16,6 +17,7 @@ const routes: Routes = [
   {path:'reports/:username', component: ReportComponent},
   {path:'editList/:username/:id', component: EditListComponent},
   {path:'newItem/:username/:listId', component: NewItemComponent},
+  {path:'editList/editItem/:username/:listId/:itemId', component: EditItemComponent},
   {path:'', component: HomeComponent}
 ];
 
