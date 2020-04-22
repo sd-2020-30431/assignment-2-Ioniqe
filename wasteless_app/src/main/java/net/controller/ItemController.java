@@ -2,64 +2,70 @@ package net.controller;
 
 import net.model.Item;
 import net.model.Lists;
+import net.model.dto.ItemDTO;
 import net.service.ItemService;
+import net.service.ListService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
+import java.util.Optional;
 
-@Controller
+//@Controller
+
+@RestController
+@CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*", exposedHeaders = "Authorization")
 public class ItemController {
 
     @Autowired
     private ItemService itemService;
 
-    private Lists list;
+    @Autowired
+    private ListService listService;
 
-    @RequestMapping("/item")
-    public String viewHomePage(Model model, @ModelAttribute("createdList") Lists list) {
-        List<Item> listOfItems = itemService.findItems(list.getId());
-        model.addAttribute("list", list);
-        model.addAttribute("listItems", listOfItems);
-        this.list = list;
-        return "item_list";
+    //private Lists list;
+
+    @RequestMapping(value = "/editList/{username}/{id}", method = RequestMethod.GET)
+    public ResponseEntity<List<Item>> viewHomePage(@PathVariable(name = "id") long id, @PathVariable(name = "username") String username) {
+        List<Item> listOfItems = itemService.findItems(id);
+//        this.list = list;
+        return new ResponseEntity<>(listOfItems, HttpStatus.OK);
     }
 
-    @RequestMapping("/newItem")
-    public String showNewItemPage(Model model, @ModelAttribute(name = "createdList") Lists list) {
-        Item item = new Item();
-        item.setList(list);
-        model.addAttribute("item", item);
-        return "new_item";
-    }
-
-    @RequestMapping(value = "/saveItem", method = RequestMethod.POST)
-    public String saveItem(@ModelAttribute("item") Item item, RedirectAttributes redirectAttributes) {
+    @RequestMapping(value = "/newItem/{username}/{listId}", method = RequestMethod.POST)
+    public ResponseEntity saveItem(@RequestBody Item item, @PathVariable(name = "listId") long id, @PathVariable(name = "username") String username) {
+        Lists list = listService.findListById(id);
         item.setList(list);
         itemService.save(item);
-        redirectAttributes.addFlashAttribute("message", "Item added successfully!");
-        return "redirect:/login";
+        return new ResponseEntity(HttpStatus.OK);
     }
 
-    @RequestMapping("/edit_item/{id}")
-    public ModelAndView showEditItemPage(@PathVariable(name = "id") int id) {
-        ModelAndView mav = new ModelAndView("edit_item");
-        Item item = itemService.getById(id);
-        mav.addObject("item", item);
-        return mav;
+    @RequestMapping(value = "/editList/editItem/{username}/{listId}/{itemId}", method = RequestMethod.POST)
+    public ResponseEntity editItem(@RequestBody Item item, @PathVariable(name = "username") String username, @PathVariable(name = "listId") long listId, @PathVariable(name = "itemId") long itemId) {
+        Lists list = listService.findListById(listId);
+        item.setList(list);
+        itemService.save(item);
+        return new ResponseEntity(HttpStatus.OK);
     }
 
-    @RequestMapping("/donate_item/{id}")
-    public String deleteItem(@PathVariable(name = "id") int id, RedirectAttributes redirectAttributes) {
+    @RequestMapping(value = "/getItem/{itemId}", method = RequestMethod.GET)
+    public ResponseEntity<Item> getItem( @PathVariable(name = "itemId") long itemId) {
+        Item item = itemService.getItemById(itemId);
+
+        return new ResponseEntity(new ItemDTO(item.getId(), item.getName(), item.getQuantity(), item.getCalories(), item.getPurchaseDate(), item.getExpirationDate(), item.getPurchaseDate()),
+                HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/donate_item/{id}", method = RequestMethod.DELETE)
+    public ResponseEntity deleteItem(@PathVariable(name = "id") int id) {
         itemService.delete(id);
-        redirectAttributes.addFlashAttribute("message", "Item donated successfully!");
-        return "redirect:/login";
+        return new ResponseEntity(HttpStatus.OK);
     }
+
 }

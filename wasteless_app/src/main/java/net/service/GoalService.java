@@ -54,4 +54,8 @@ public class GoalService {
     public User getUserOfGoal(long userId) {
         return userRepository.findUserById(userId);
     }
+
+    public User getUserByUsernameOfGoal(String username){
+        return userRepository.findUserByUsername(username);
+    }
 }

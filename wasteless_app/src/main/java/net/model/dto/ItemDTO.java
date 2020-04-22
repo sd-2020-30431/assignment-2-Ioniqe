@@ -1,40 +1,19 @@
-package net.model;
+package net.model.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.*;
 import java.util.Date;
 
-@Entity
-@Table(name = "item")
-public class Item {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class ItemDTO {
     private Long id;
-
-    @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "list_id", nullable = false)
-    private Lists list;
-
     private String name;
     private int quantity;
     private int calories;
-
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date purchaseDate;
-
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date expirationDate;
-
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date consumptionDate;
 
-    public Item() {
-    }
-
-    public Item(String name, int quantity, int calories, Date purchaseDate, Date expirationDate, Date consumptionDate) {
+    public ItemDTO(Long id, String name, int quantity, int calories, Date purchaseDate, Date expirationDate, Date consumptionDate) {
+        this.id = id;
         this.name = name;
         this.quantity = quantity;
         this.calories = calories;
@@ -49,14 +28,6 @@ public class Item {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Lists getList() {
-        return list;
-    }
-
-    public void setList(Lists list) {
-        this.list = list;
     }
 
     public String getName() {

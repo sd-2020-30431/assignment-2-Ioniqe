@@ -72,4 +72,5 @@ public class User {
     public void setGoal(Long goal) {
         this.goal = goal;
     }
+
 }

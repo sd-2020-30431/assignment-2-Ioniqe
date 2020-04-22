@@ -31,4 +31,6 @@ public class ItemService {
     }
 
     public Item getById(long id){return itemRepository.findById(id).get();}
+
+    public Item getItemById(long id){return itemRepository.findItemById(id);}
 }
