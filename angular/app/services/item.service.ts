@@ -23,8 +23,15 @@ export class ItemService {
         tap(_ => this.log('fetched items')));
   }
 
-  // /newItem/{username}/{listId}
   saveItem(item : Item, username:string, listId:number): Observable<Object>{
     return this.http.post(this.listUrl + "/newItem/" + username + "/" + listId, item);
+  }
+
+  editItem(item : Item, username:string, listId:number, itemId:number): Observable<Object>{
+    return this.http.post(this.listUrl + "editList/editItem/" + username + "/" + listId + "/" + itemId, item);
+  }
+
+  getItemById(itemId:number): Observable<any>{
+    return this.http.get(this.listUrl + "getItem/" + itemId);
   }
 }

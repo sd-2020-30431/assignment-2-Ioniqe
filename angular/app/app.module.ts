@@ -14,6 +14,7 @@ import { NewUserComponent } from './new-user/new-user.component';
 import { ReportComponent } from './report/report.component';
 import { EditListComponent } from './edit-list/edit-list.component';
 import { NewItemComponent } from './new-item/new-item.component';
+import { EditItemComponent } from './edit-item/edit-item.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { NewItemComponent } from './new-item/new-item.component';
     ReportComponent,
     EditListComponent,
     NewItemComponent,
+    EditItemComponent,
   ],
   imports: [
     BrowserModule,

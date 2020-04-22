@@ -30,11 +30,11 @@ export class EditListComponent implements OnInit {
   }
 
   editItem(id:number){
-
+    this._router.navigate(['/editList/editItem', this.username, this.listId, id]);
   }
 
   donateItem(id:number){
-
+    //TODO show charity list, then delete
   }
 
   newItem(){

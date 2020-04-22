@@ -18,11 +18,11 @@
         <tbody>
             <tr *ngFor="let item of items | async">
                 <td>{{item.name}}</td>
-                <td>{{item.quantity}}</td>
-                <td>{{item.calories}}</td>
-                <td>{{item.purchaseDate}}</td>
-                <td>{{item.expirationDate}}</td>
-                <td>{{item.consumptionDate}}</td>
+                <td><div class="center">{{item.quantity}}</div></td>
+                <td><div class="center">{{item.calories}}</div></td>
+                <td><div class="center">{{item.purchaseDate | date}}</div></td>
+                <td><div class="center">{{item.expirationDate | date}}</div></td>
+                <td><div class="center">{{item.consumptionDate | date}}</div></td>
                 <td class="center">
                     <button (click)="editItem(item.id)">edit</button>
                 </td>

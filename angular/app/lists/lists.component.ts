@@ -69,10 +69,14 @@ export class ListsComponent implements OnInit {
   submitNewList(){
     this.newList.id = 1;
     this.newList.name = this.newListNameForm.value;
-    console.log("LIST VALUE: " + this.newList.name);
+    // console.log("LIST VALUE: " + this.newList.name);
     this.service.saveList(this.newList, this.username)
       .subscribe(data => {console.log(data), this.reloadData()}, error => console.log(error));
     this.newList = new Lists();
+  }
+
+  gotoLoginPage(pageName:string) :void {
+    this._router.navigate([`${pageName}`]);
   }
 
 }

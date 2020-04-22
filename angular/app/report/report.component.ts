@@ -20,11 +20,11 @@ export class ReportComponent implements OnInit {
   }
 
   weeklyReports(){
-
+    //TODO
   }
 
   monthlyReports(){
-
+    //TODO
   }
 
   goBackToLists(){
