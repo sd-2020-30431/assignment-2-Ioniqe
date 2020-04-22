@@ -1,0 +1,85 @@
+<h1>{{reportType}} REPORT DETAILS</h1>
+
+<div class="center">
+    <h1>
+        <div *ngIf="reportType == 'WEEKLY'">Eaten food this {{reportType | lowercase | slice:0:4}}: </div>
+        <div *ngIf="reportType == 'MONTHLY'">Eaten food this {{reportType | lowercase | slice:0:5}}: </div>
+    </h1>
+</div>
+
+<div class="center">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Quantity</th>
+                <th>Calories</th>
+                <th>Purchase Date</th>
+                <th>Expiration Date</th>
+                <th>Consumption Date</th>
+            </tr>
+        </thead>
+        
+        <tbody>
+            <tr *ngFor="let item of eatenFood | async">
+                <td>{{item.name}}</td>
+                <td><div class="center">{{item.quantity}}</div></td>
+                <td><div class="center">{{item.calories}}</div></td>
+                <td><div class="center">{{item.purchaseDate | date}}</div></td>
+                <td><div class="center">{{item.expirationDate | date}}</div></td>
+                <td><div class="center">{{item.consumptionDate | date}}</div></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="center">
+    <h1 style="font-size: 200%;">Eaten Calories: </h1>    
+    <h1 *ngIf="eatenCalories" style="margin-left: 1%; font-size: 200%;">
+        {{ eatenCalories | async }}
+    </h1>
+</div>
+
+
+<div class="center">
+    <h1>
+        <div *ngIf="reportType == 'WEEKLY'">Expired food this {{reportType | lowercase | slice:0:4}}: </div>
+        <div *ngIf="reportType == 'MONTHLY'">Expired food this {{reportType | lowercase | slice:0:5}}: </div>
+    </h1>
+</div>
+
+
+<div class="center">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Quantity</th>
+                <th>Calories</th>
+                <th>Purchase Date</th>
+                <th>Expiration Date</th>
+            </tr>
+        </thead>
+        
+        <tbody>
+            <tr *ngFor="let item of expiredFood | async">
+                <td>{{item.name}}</td>
+                <td><div class="center">{{item.quantity}}</div></td>
+                <td><div class="center">{{item.calories}}</div></td>
+                <td><div class="center">{{item.purchaseDate | date}}</div></td>
+                <td><div class="center">{{item.expirationDate | date}}</div></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="center">
+    <h1 style="font-size: 200%;">Wasted Calories: </h1>    
+    <h1 *ngIf="wastedCalories" style="margin-left: 1%; font-size: 200%;">
+        {{ wastedCalories | async }}
+    </h1>
+</div>
+
+<div class="center" style="margin-top: 5%;">
+    <button (click)="backToLists()">Back to Lists</button>
+</div>

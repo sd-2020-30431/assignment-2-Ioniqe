@@ -34,4 +34,8 @@ export class ItemService {
   getItemById(itemId:number): Observable<any>{
     return this.http.get(this.listUrl + "getItem/" + itemId);
   }
+
+  deleteItem(id:number): Observable<any> {
+    return this.http.delete(this.listUrl + "donate_item/" + id);
+  }
 }

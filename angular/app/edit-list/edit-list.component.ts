@@ -19,6 +19,7 @@ export class EditListComponent implements OnInit {
     private itemService:ItemService,
     private _router: Router) {
     this.route.params.subscribe( params => {this.username = params['username']; this.listId = params['id']});
+    this.reloadData();
    }
 
   ngOnInit(): void {
@@ -34,7 +35,7 @@ export class EditListComponent implements OnInit {
   }
 
   donateItem(id:number){
-    //TODO show charity list, then delete
+    this._router.navigate(['/charities', this.username, this.listId, id]);
   }
 
   newItem(){

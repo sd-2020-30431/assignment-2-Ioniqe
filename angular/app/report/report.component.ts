@@ -10,24 +10,29 @@ export class ReportComponent implements OnInit {
 
   username:string;
   listId:number;
+  userGoal:number;
 
   constructor( private route: ActivatedRoute,
     private _router: Router) { 
-    this.route.params.subscribe( params => {this.username = params['username']});
+    this.route.params.subscribe( params => {this.username = params['username']; this.userGoal = params['userGoal']});
   }
 
   ngOnInit(): void {
   }
 
   weeklyReports(){
-    //TODO
+    this._router.navigate(['/report', this.username, 'WEEKLY', this.userGoal]);
   }
 
   monthlyReports(){
-    //TODO
+    this._router.navigate(['/report', this.username, 'MONTHLY', this.userGoal]);
   }
 
   goBackToLists(){
     this._router.navigate(['/lists', this.username]);
+  }
+
+  goToGoalStats(){
+    this._router.navigate(['lists/displayGoalStats', this.username, this.userGoal]);
   }
 }

@@ -15,6 +15,9 @@ import { ReportComponent } from './report/report.component';
 import { EditListComponent } from './edit-list/edit-list.component';
 import { NewItemComponent } from './new-item/new-item.component';
 import { EditItemComponent } from './edit-item/edit-item.component';
+import { DonateComponent } from './donate/donate.component';
+import { ReportDetailsComponent } from './report-details/report-details.component';
+import { GoalStatsComponent } from './goal-stats/goal-stats.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +30,9 @@ import { EditItemComponent } from './edit-item/edit-item.component';
     EditListComponent,
     NewItemComponent,
     EditItemComponent,
+    DonateComponent,
+    ReportDetailsComponent,
+    GoalStatsComponent
   ],
   imports: [
     BrowserModule,
