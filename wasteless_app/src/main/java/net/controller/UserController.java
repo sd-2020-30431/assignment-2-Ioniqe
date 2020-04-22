@@ -1,17 +1,16 @@
 package net.controller;
 
 import net.model.User;
+import net.model.dto.UserDTO;
 import net.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.http.ResponseEntity;
 
-@Controller
+@RestController
+@CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*", exposedHeaders = "Authorization")
+//@Controller
 public class UserController {
 
     @Autowired
@@ -19,63 +18,36 @@ public class UserController {
 
     private User user;
 
-    //get form page
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String getLoginForm() {
-        return "login";
+    @RequestMapping(value = "/login2", method = RequestMethod.GET)
+    public ResponseEntity<User> login2() {
+        User user = new User((long) 1123, "test", "test");
+        return new ResponseEntity<User>(user, HttpStatus.OK);
     }
 
-    //check for credentials
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String login(@ModelAttribute(name = "user") User user, Model model, RedirectAttributes redirectAttributes) {
-        String username = user.getUsername();
-        String password = user.getPassword();
+    @RequestMapping(value = "/login2", method = RequestMethod.POST)
+    public ResponseEntity<User> update(@RequestBody User myUser) {
+        String username = myUser.getUsername().trim();
+        String password = myUser.getPassword().trim();
         User verifyUser = service.findUser(username, password);
-
-        if (verifyUser != null) {
-            //this means that the user does exist
-            redirectAttributes.addFlashAttribute("verifiedUser", verifyUser);
-            redirectAttributes.addFlashAttribute("username", username);
-            return "redirect:/lists/" + username;
+        if (verifyUser == null) {
+            return new ResponseEntity("Invalid User", HttpStatus.UNAUTHORIZED);
         }
-        if (!username.equals("") && !password.equals(""))
-            model.addAttribute("message", "Invalid User");
-        return "login";
+        return new ResponseEntity(new UserDTO(username, password), HttpStatus.OK);
     }
 
-    @RequestMapping("/newUser")
-    public String showNewProductPage(Model model) {
-        User user = new User();
-        model.addAttribute("user", user);
-        return "new_user";
-    }
-
-    @RequestMapping(value = "/save", method = RequestMethod.POST) //create a new user
-    public String saveProduct(@ModelAttribute("user") User user, RedirectAttributes redirectAttributes) {
-        if (service.findUser(user.getUsername(), user.getPassword()) != null) {
-            redirectAttributes.addFlashAttribute("message", "User Already Exists!");
-        } else {
-            service.save(user);
-            redirectAttributes.addFlashAttribute("message", "User Created!");
-        }
-        return "redirect:/login";
-    }
-
-    @RequestMapping("/inputGoal/{username}")
-    public String showGoalsPage(Model model, @PathVariable(name = "username") String username) {
-        User user = service.findUserByUsername(username);
-        this.user = user;
-        model.addAttribute("user", user);
-        return "goal_page";
-    }
-
-    @RequestMapping(value = "/updateUser", method = RequestMethod.POST) //create a new user
-    public String editUser(@ModelAttribute("user") User user, RedirectAttributes redirectAttributes) {
-        User updatedUser = this.user;
-        updatedUser.setGoal(user.getGoal());
+    @RequestMapping(value = "/lists/updateUserGoal", method = RequestMethod.PUT)
+    public ResponseEntity editUser(@RequestBody User updatedUserGoal) {
+        User updatedUser = service.findUserByUsername(updatedUserGoal.getUsername());
+        updatedUser.setGoal(updatedUserGoal.getGoal());
         service.save(updatedUser);
-        redirectAttributes.addFlashAttribute("message", "User Updated!");
-        return "redirect:/login";
-
+        return new ResponseEntity(HttpStatus.OK);
     }
+
+    @RequestMapping(value = "/newUser", method = RequestMethod.POST)
+    public ResponseEntity saveUser(@RequestBody User newUser) {
+        service.save(newUser);
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
+
 }

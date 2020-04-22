@@ -13,5 +13,5 @@ public interface ListRepository extends JpaRepository<Lists, Long> {
     List<Lists> findAllByUserId(Long userId);
     Optional<Lists> findById(Long id);
     List<Lists> findAllByUser_Username(String username);
-
+    Lists findListsById(Long id);
 }
