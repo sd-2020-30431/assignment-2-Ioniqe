@@ -6,6 +6,7 @@ h1 {
     font-size: 250%;
   }
   h2, h3 {
+    text-align: center;
     color: #EB9486;
     font-family: 'Arial Narrow Bold';
     font-weight: lighter;

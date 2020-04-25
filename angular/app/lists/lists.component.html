@@ -48,6 +48,29 @@
     <button (click)="submitNewList()" style="border-radius: 8px;">Submit</button> 
 </div>
 
-<div class="center" style="margin-top: 3%;">
+<h2>Items that will expire in the following days</h2>
+<div class="center" style="margin-top: 1%;">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>delete</th>
+            </tr>
+        </thead>
+        
+        <tbody>
+            <tr *ngFor="let item of expiredItems | async">
+                <td>{{item.name}}</td>
+                <td>
+                    <button (click)="donateItem(item.id)">donate</button> 
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>
+
+
+<div class="center" style="margin-top: 5%;">
     <button (click)="gotoLoginPage('login')" style="border-radius: 8px;">Back to Log in</button>
 </div>

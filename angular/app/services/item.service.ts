@@ -38,4 +38,9 @@ export class ItemService {
   deleteItem(id:number): Observable<any> {
     return this.http.delete(this.listUrl + "donate_item/" + id);
   }
+
+  getExpiredItems(username:string): Observable<Item[]>{
+    return this.http.get<Item[]>(this.listUrl + "notification/" + username);
+  }
+  
 }

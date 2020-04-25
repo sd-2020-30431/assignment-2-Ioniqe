@@ -15,14 +15,14 @@ export class DonateComponent implements OnInit {
   itemId:number;
   charities : Observable<Charity[]>;
   username:string;
-  listId:number;
+  // listId:number;
 
 
   constructor(private route: ActivatedRoute,
     private donateService:DonateService,
     private itemService:ItemService,
     private _router: Router) {
-    this.route.params.subscribe( params => {this.itemId = params['itemId']; this.listId = params['listId']; this.username = params['username'];});
+    this.route.params.subscribe( params => {this.itemId = params['itemId']; this.username = params['username'];});
    }
 
   ngOnInit(): void {
@@ -32,7 +32,7 @@ export class DonateComponent implements OnInit {
   donateToThisCharity(){
     this.itemService.deleteItem(this.itemId).subscribe();
 
-    this._router.navigate(['/editList', this.username, this.listId]);
+    this._router.navigate(['/lists', this.username]);
   }
 
 }
