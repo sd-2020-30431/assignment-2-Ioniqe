@@ -1,12 +1,19 @@
 package net.controller;
 
+import net.model.Item;
+import net.model.Lists;
 import net.model.User;
 import net.model.dto.UserDTO;
+import net.observer.ItemExpirationObserver;
+import net.service.ItemService;
+import net.service.ListService;
 import net.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
+
+import java.util.*;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*", exposedHeaders = "Authorization")
@@ -32,6 +39,7 @@ public class UserController {
         if (verifyUser == null) {
             return new ResponseEntity("Invalid User", HttpStatus.UNAUTHORIZED);
         }
+
         return new ResponseEntity(new UserDTO(username, password), HttpStatus.OK);
     }
 
