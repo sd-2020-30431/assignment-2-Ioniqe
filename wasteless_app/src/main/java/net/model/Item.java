@@ -4,6 +4,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.text.SimpleDateFormat;
+import java.time.Duration;
+import java.util.Calendar;
 import java.util.Date;
 
 @Entity
@@ -105,5 +108,24 @@ public class Item {
 
     public void setConsumptionDate(Date consumptionDate) {
         this.consumptionDate = consumptionDate;
+    }
+
+
+
+    //-----------for OBSERVER----------------
+
+    public int notifyItem(){
+        Date today = Calendar.getInstance().getTime();
+
+        long daysBetween = Duration.between(today.toInstant(), expirationDate.toInstant()).toDays();
+
+//        if(daysBetween <= 3){
+//            System.out.println(daysBetween + " days remaining for " + name);
+//        }
+
+        return (int) daysBetween;
+//        if(today.compareTo(expirationDate) == 0){
+//            System.out.println("THEY ARE THE SAME DATE");
+//        }
     }
 }
