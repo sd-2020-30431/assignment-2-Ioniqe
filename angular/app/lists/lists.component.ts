@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, ɵConsole } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, interval } from 'rxjs';
 import { Lists } from '../lists';
 import { HttpClient } from '@angular/common/http';
 import { tap } from 'rxjs/operators';
@@ -8,6 +8,8 @@ import { ListsService } from '../services/lists.service';
 import { FormControl } from '@angular/forms';
 import { UserService } from '../services/user.service';
 import { User } from '../user';
+import { ItemService } from '../services/item.service';
+import { Item } from '../item';
 
 @Component({
   selector: 'app-lists',
@@ -23,19 +25,31 @@ export class ListsComponent implements OnInit {
   constructor(private route: ActivatedRoute,
     private http: HttpClient,
     private service:ListsService,
+    private itemService:ItemService,
     private userService:UserService,
     private _router: Router) { 
     this.route.params.subscribe( params => {this.username = params['username']; console.log("Hello from lists " + this.username)});
   }
 
   lists : Observable<Lists[]>;
+  expiredItems : Observable<Item[]>;
 
   ngOnInit(): void {
     this.reloadData();
+    this.reloadExpiredItems();
+
+    this.reloadExpiredItems();
+    interval(86400000).subscribe(
+      (val) => { this.reloadExpiredItems() }
+    ); //update every day -> not that glamorous but it works this way
   }
 
   reloadData(){
     this.lists = this.service.getLists(this.username);
+  }
+
+  reloadExpiredItems(){
+    this.expiredItems = this.itemService.getExpiredItems(this.username);
   }
 
   editList(id:number){
@@ -77,6 +91,10 @@ export class ListsComponent implements OnInit {
 
   gotoLoginPage(pageName:string) :void {
     this._router.navigate([`${pageName}`]);
+  }
+
+  donateItem(itemId:number){
+    this._router.navigate(['/charities', this.username, itemId]);
   }
 
 }

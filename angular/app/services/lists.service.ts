@@ -31,4 +31,5 @@ export class ListsService {
   deleteList(id:number, username:string): Observable<any> {
     return this.http.delete(this.listUrl + "/delete/" + username + "/" + id);
   }
+
 }

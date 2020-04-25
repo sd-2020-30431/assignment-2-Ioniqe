@@ -11,12 +11,12 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
   title = 'Wasteless App';
+  errorsg = "";
 
   constructor(private httpClient:HttpClient,
     private _router: Router){ }
 
   ngOnInit(): void {
-    
   }
 
   usernameForm = new FormControl('');

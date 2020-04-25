@@ -22,7 +22,7 @@ const routes: Routes = [
   {path:'lists/displayGoalStats/:username/:userGoal', component: GoalStatsComponent},
   {path:'newItem/:username/:listId', component: NewItemComponent},
   {path:'report/:username/:reportType/:userGoal', component: ReportDetailsComponent},
-  {path:'charities/:username/:listId/:itemId', component: DonateComponent},
+  {path:'charities/:username/:itemId', component: DonateComponent},
   {path:'editList/editItem/:username/:listId/:itemId', component: EditItemComponent},
   {path:'', component: HomeComponent}
 ];

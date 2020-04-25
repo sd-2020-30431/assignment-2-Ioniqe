@@ -35,7 +35,7 @@ export class EditListComponent implements OnInit {
   }
 
   donateItem(id:number){
-    this._router.navigate(['/charities', this.username, this.listId, id]);
+    this._router.navigate(['/charities', this.username, id]);
   }
 
   newItem(){
